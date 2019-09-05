@@ -6,11 +6,10 @@
 /*   By: bvilla <bvilla@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/09/03 21:12:38 by bvilla            #+#    #+#             */
-/*   Updated: 2019/09/04 17:10:16 by bvilla           ###   ########.fr       */
+/*   Updated: 2019/09/05 15:58:48 by bvilla           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include <libft.h>
 #include <lem_in.h>
 #define	SET_ME "#set_me"
 
@@ -35,8 +34,8 @@ void	handle_commands(char **s, char **t, char *line){
 }
 
 int		hashtag_error_check(char *line, int rooms_complete_flag){
-	static int	start_flag = 0;
-	static int	end_flag = 0;
+	static char	start_flag = 0;
+	static char	end_flag = 0;
 
 	if (ft_strnequ(line, "##", 2)){
 		if (rooms_complete_flag)
@@ -51,7 +50,7 @@ int		hashtag_error_check(char *line, int rooms_complete_flag){
 	return (0);
 }
 
-int		room_error_check(char *line, int *rooms_complete_flag, char *s, char *t)
+int		room_error_check(char *line, char *rooms_complete_flag, char *s, char *t)
 {
 	char	**tmp;
 	int		err = 0;
@@ -85,8 +84,8 @@ int		links_error_check (char *line){
 
 int		input_line_error_check(char *line, char *s, char *t)
 {
-	static int n_complete_flag = 0;
-	static int rooms_complete_flag = 0;
+	static char n_complete_flag = 0;
+	static char rooms_complete_flag = 0;
 
 	if (!n_complete_flag){
 		n_complete_flag = 1;
@@ -107,15 +106,23 @@ int		input_line_error_check(char *line, char *s, char *t)
 	return (0);
 }
 
+t_graph	*graph_init(){
+	t_graph	*new = malloc(sizeof(t_graph));
+
+	new->map = map_init();
+	new->s = NULL;
+	new->t = NULL;
+	return (new);
+}
+
 int		main()
 {
-	char	*line;
-	char	*s = NULL;
-	char	*t = NULL;
-	int		n = -1;
+	char			*line;
+	t_graph	*const	graph = graph_init();
+	int				n = -1;
 	
-	while (get_next_line(0, &line)){
-		if (input_line_error_check(line, s, t))
+	while (get_next_line(0, &line) > 0){
+		if (input_line_error_check(line, graph->s, graph->t))
 		{
 			ft_printf("ERROR\n");
 			free(line);
@@ -126,13 +133,13 @@ int		main()
 			if (n == -1)
 				n = ft_atoi(line);
 			if (ft_strnequ("##", line, 2) || 
-					ft_strequ(SET_ME, s) || ft_strequ(SET_ME, t))
-				handle_commands(&s, &t, line);
+					ft_strequ(SET_ME, graph->s) || ft_strequ(SET_ME, graph->t))
+				handle_commands(&graph->s, &graph->t, line);
 			if (!ft_strnequ("#", line, 1) || ft_strnequ("##", line, 2))
 				ft_printf("%s\n", line);
 		}
 		free(line);
 	}
-	ft_printf("s: %s, t: %s\n", s, t);
+	ft_printf("s: %s, t: %s\n", graph->s, graph->t);
 	return (0);
 }
