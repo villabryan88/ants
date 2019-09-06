@@ -6,26 +6,24 @@
 /*   By: bvilla <bvilla@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/09/04 16:58:32 by bvilla            #+#    #+#             */
-/*   Updated: 2019/09/06 10:50:34 by bvilla           ###   ########.fr       */
+/*   Updated: 2019/09/06 10:56:29 by bvilla           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <libft.h>
 
-#define SIZE 2
-
-t_map		*map_init(void)
+t_map		*map_init(size_t size)
 {
 	t_map	*new;
 
 	new = malloc(sizeof(t_map));
-	new->size = SIZE;
-	new->map = malloc(SIZE * sizeof(void*));
-	ft_bzero(new->map, SIZE * sizeof(void*));
+	new->size = size;
+	new->map = malloc(size * sizeof(void*));
+	ft_bzero(new->map, size * sizeof(void*));
 	return (new);
 }
 
-int			map_hash(void *key, size_t key_size)
+int			map_hash(t_map *map, void *key, size_t key_size)
 {
 	unsigned int	sum;
 
@@ -36,7 +34,7 @@ int			map_hash(void *key, size_t key_size)
 		key = ((char*)key) + 1;
 		key_size--;
 	}
-	return (sum % SIZE);
+	return (sum % map->size);
 }
 
 t_map_node	*map_node_new(void *key, size_t key_size, void *val)
@@ -60,8 +58,8 @@ char		map_insert(t_map *map, void *key, size_t key_size, void *val)
 		return (0);
 	if (!map || !map->map || !key)
 		return (0);
-	new->next = map->map[map_hash(key, key_size)];
-	map->map[map_hash(key, key_size)] = new;
+	new->next = map->map[map_hash(map, key, key_size)];
+	map->map[map_hash(map, key, key_size)] = new;
 	return (1);
 }
 
@@ -71,7 +69,7 @@ void		**map_find(t_map *map, char *key, size_t key_size)
 
 	if (!map || !map->map || !key)
 		return (NULL);
-	it = map->map[map_hash(key, key_size)];
+	it = map->map[map_hash(map, key, key_size)];
 	while (it)
 	{
 		if (it->key_size == key_size && !ft_memcmp(it->key, key, key_size))

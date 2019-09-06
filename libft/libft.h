@@ -6,7 +6,7 @@
 /*   By: bvilla <bvilla@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/10/22 20:07:39 by bvilla            #+#    #+#             */
-/*   Updated: 2019/09/06 10:46:14 by bvilla           ###   ########.fr       */
+/*   Updated: 2019/09/06 10:56:27 by bvilla           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -113,8 +113,8 @@ void				ft_strarrdel(char **str_arr);
 void				ft_lstdelnode(void *content, size_t size);
 char				**ft_strarrsearch(char **haystack, char *needle);
 void				ft_printhex(void *str, size_t n);
-t_map				*map_init(void);
-int					map_hash(void *key, size_t key_size);
+t_map				*map_init(size_t size);
+int					map_hash(t_map *map, void *key, size_t key_size);
 t_map_node			*map_node_new(void *key, size_t key_size, void *val);
 char				map_insert(t_map *map, void *key, size_t key_size,
 															void *val);

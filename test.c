@@ -6,14 +6,15 @@
 /*   By: bvilla <bvilla@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/09/06 09:16:33 by bvilla            #+#    #+#             */
-/*   Updated: 2019/09/06 10:41:34 by bvilla           ###   ########.fr       */
+/*   Updated: 2019/09/06 10:57:53 by bvilla           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft/libft.h"
+#define MAP_SIZE 40000
 
 int main(){
-    t_map   *map = map_init();
+    t_map   *map = map_init(MAP_SIZE);
 
     map_insert(map, "hi", sizeof("hi"), "hola");
     map_insert(map, "bye", sizeof("bye"), "adios");
