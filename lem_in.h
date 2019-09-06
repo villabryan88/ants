@@ -6,7 +6,7 @@
 /*   By: bvilla <bvilla@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/09/04 17:09:29 by bvilla            #+#    #+#             */
-/*   Updated: 2019/09/05 15:59:58 by bvilla           ###   ########.fr       */
+/*   Updated: 2019/09/05 18:05:03 by bvilla           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,6 +14,7 @@
 # define LEM_IN_H
 # include <libft.h>
 # include <stdlib.h>
+# include <stdio.h>
 
 typedef struct	s_map {
 	t_list		**map;
@@ -32,4 +33,5 @@ typedef struct	s_edge {
 }				t_edge;
 
 t_map			*map_init(void);
+void			kill(char print);
 #endif

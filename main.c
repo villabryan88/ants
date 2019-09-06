@@ -6,19 +6,30 @@
 /*   By: bvilla <bvilla@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/09/03 21:12:38 by bvilla            #+#    #+#             */
-/*   Updated: 2019/09/05 15:58:48 by bvilla           ###   ########.fr       */
+/*   Updated: 2019/09/05 18:35:25 by bvilla           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <lem_in.h>
 #define	SET_ME "#set_me"
 
+void	kill(char print){
+	ft_printf("ERROR\n");
+	if (print)
+		perror(NULL);
+	exit(0);
+}
+
 char	*get_start_end(char *line){
 	char	*st;
 	char	**tmp;
 
 	tmp = ft_strsplit(line, ' ');
-	st = ft_strdup(tmp[0]);
+	if (!tmp || !(st = ft_strdup(tmp[0])))
+	{
+		kill(1);
+		return (NULL);
+	}
 	ft_strarrdel(tmp);
 	return (st);
 }
@@ -120,14 +131,11 @@ int		main()
 	char			*line;
 	t_graph	*const	graph = graph_init();
 	int				n = -1;
-	
-	while (get_next_line(0, &line) > 0){
-		if (input_line_error_check(line, graph->s, graph->t))
-		{
-			ft_printf("ERROR\n");
-			free(line);
-			return (0);
-		}
+
+	while (get_next_line(0, &line) > 0)
+	{
+		if (!line || input_line_error_check(line, graph->s, graph->t))
+			kill(0);
 		else
 		{
 			if (n == -1)

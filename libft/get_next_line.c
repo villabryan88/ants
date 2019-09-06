@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   get_next_line.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: bvilla <marvin@42.fr>                      +#+  +:+       +#+        */
+/*   By: bvilla <bvilla@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/11/08 00:22:24 by bvilla            #+#    #+#             */
-/*   Updated: 2018/11/15 18:42:21 by bvilla           ###   ########.fr       */
+/*   Updated: 2019/09/05 18:10:47 by bvilla           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -79,10 +79,15 @@ int		get_next_line(const int fd, char **line)
 	if (!(loc = ft_lstfindsize(begin_list, fd)))
 	{
 		if (!(loc = ft_lstnew(NULL, 0)))
+		{
+			*line = NULL;
 			return (-1);
+		}
 		loc->content_size = fd;
 		ft_lstadd(&begin_list, loc);
 	}
 	ret = get_next_line_og(fd, line, (char**)&(loc->content));
+	if (ret == -1)
+		*line = NULL;
 	return (ret);
 }

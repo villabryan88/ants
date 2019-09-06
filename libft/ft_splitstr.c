@@ -6,7 +6,7 @@
 /*   By: bvilla <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/11/09 23:43:58 by bvilla            #+#    #+#             */
-/*   Updated: 2019/03/04 19:30:51 by bvilla           ###   ########.fr       */
+/*   Updated: 2019/09/05 18:04:17 by bvilla           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,8 +18,10 @@ char	*ft_splitstr(char **src, char **front, int loc)
 	int		newsrclen;
 
 	newsrclen = ft_strlen(*src) - loc;
-	*front = (char*)malloc(loc + 1);
-	newsrc = (char*)malloc(newsrclen > 0 ? newsrclen : 1);
+	if (!(*front = (char*)malloc(loc + 1)))
+		return (NULL);
+	if (!(newsrc = (char*)malloc(newsrclen > 0 ? newsrclen : 1)))
+		return (NULL);
 	ft_strncpy(*front, *src, loc);
 	front[0][loc] = '\0';
 	if (newsrclen)
