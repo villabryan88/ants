@@ -6,7 +6,7 @@
 /*   By: bvilla <bvilla@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/09/03 21:12:38 by bvilla            #+#    #+#             */
-/*   Updated: 2019/09/05 23:10:21 by bvilla           ###   ########.fr       */
+/*   Updated: 2019/09/06 09:10:55 by bvilla           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -90,7 +90,7 @@ int		links_error_check (char *line){
 
 	tmp = ft_strsplit(line, '-');
 	if (ft_arrlen(tmp, sizeof(void*)) == 2)
-		(void)tmp; // check dictionary if valid entry
+		(void)line;
 	else
 		err = 1;
 	ft_strarrdel(tmp);

@@ -6,12 +6,12 @@
 #    By: bvilla <bvilla@student.42.fr>              +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2018/10/22 20:11:16 by bvilla            #+#    #+#              #
-#    Updated: 2019/09/04 17:10:31 by bvilla           ###   ########.fr        #
+#    Updated: 2019/09/06 10:51:34 by bvilla           ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
 NAME = lem_in
-SOURCE = main.c dictionary.c
+SOURCE = main.c
 INC = .
 OBJS = $(SOURCE:%.c=%.o)
 

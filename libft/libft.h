@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   libft.h                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: bvilla <marvin@42.fr>                      +#+  +:+       +#+        */
+/*   By: bvilla <bvilla@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/10/22 20:07:39 by bvilla            #+#    #+#             */
-/*   Updated: 2019/04/23 15:39:17 by bvilla           ###   ########.fr       */
+/*   Updated: 2019/09/06 10:46:14 by bvilla           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,6 +23,18 @@ typedef struct		s_list
 	size_t			content_size;
 	struct s_list	*next;
 }					t_list;
+typedef struct		s_map_nd
+{
+	void			*key;
+	size_t			key_size;
+	void			*val;
+	struct s_map_nd	*next;
+}					t_map_node;
+typedef struct		s_map
+{
+	t_map_node		**map;
+	int				size;
+}					t_map;
 void				*ft_memset(void *b, int c, size_t len);
 void				ft_bzero(void *s, size_t n);
 void				*ft_memcpy(void *dst, const void *src, size_t n);
@@ -101,4 +113,10 @@ void				ft_strarrdel(char **str_arr);
 void				ft_lstdelnode(void *content, size_t size);
 char				**ft_strarrsearch(char **haystack, char *needle);
 void				ft_printhex(void *str, size_t n);
+t_map				*map_init(void);
+int					map_hash(void *key, size_t key_size);
+t_map_node			*map_node_new(void *key, size_t key_size, void *val);
+char				map_insert(t_map *map, void *key, size_t key_size,
+															void *val);
+void				**map_find(t_map *map, char *key, size_t key_size);
 #endif

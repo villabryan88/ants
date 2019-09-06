@@ -6,7 +6,7 @@
 /*   By: bvilla <bvilla@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/09/04 17:09:29 by bvilla            #+#    #+#             */
-/*   Updated: 2019/09/05 22:53:48 by bvilla           ###   ########.fr       */
+/*   Updated: 2019/09/06 10:41:57 by bvilla           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,11 +15,6 @@
 # include <libft.h>
 # include <stdlib.h>
 # include <stdio.h>
-
-typedef struct	s_map {
-	t_list		**map;
-	int			size;
-}				t_map; 
 
 typedef struct	s_graph {
 	t_map		*adj_map;
