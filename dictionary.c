@@ -6,7 +6,7 @@
 /*   By: bvilla <bvilla@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/09/04 16:58:32 by bvilla            #+#    #+#             */
-/*   Updated: 2019/09/05 21:39:01 by bvilla           ###   ########.fr       */
+/*   Updated: 2019/09/05 22:44:54 by bvilla           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,7 +30,7 @@ t_map    *map_init(void)
 
 int		map_hash(char *key)
 {
-	return ((int)key % SIZE);
+	return ((unsigned int)key % SIZE);
 }
 
 void	map_insert(t_map *map, char *key, void *val)
@@ -47,16 +47,23 @@ void	map_insert(t_map *map, char *key, void *val)
 	ft_lstadd(&map->map[map_hash(key)], new);
 }
 
-void	**map_find(t_map *map, char *key){
+void	**map_find(t_map *adj_map, char *key){
 	t_list	*it;
 
-	if (!map || !map->map || !key)
+	if (!adj_map || !adj_map->map || !key)
 		return (NULL);
-	it = map->map[map_hash(key)];
+	it = adj_map->map[map_hash(key)];
 	while (it && !ft_strequ(((t_list*)it->content)->content, key))
 		it = it->next;
 	if (!it)
 		return (NULL);
-	return (&((t_list*)it->content)->next);
+	return ((void**)&((t_list*)it->content)->next);
 }
 
+// void	add_graph_node(t_graph *graph, char *name)
+// {
+// 	t_list	*node;
+	
+// 	node = ft_lstnew(name, 0);
+
+// }
