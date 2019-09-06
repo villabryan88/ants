@@ -6,7 +6,7 @@
 /*   By: bvilla <bvilla@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/09/03 21:12:38 by bvilla            #+#    #+#             */
-/*   Updated: 2019/09/05 22:37:38 by bvilla           ###   ########.fr       */
+/*   Updated: 2019/09/05 23:10:21 by bvilla           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -131,8 +131,13 @@ void	handle_links(char *line){
 	(void)line;
 }
 
-void	handle_rooms(char *line){
-	(void)line;
+void	handle_rooms(char *line, t_graph *const graph)
+{
+	char	**tmp;
+
+	tmp = ft_strsplit(line, ' ');
+	(void)graph;
+	add_graph_node(graph, tmp[0]);
 }
 
 void	handle_input(char *line, t_graph *const graph, int *n,
@@ -148,7 +153,7 @@ void	handle_input(char *line, t_graph *const graph, int *n,
 		if (rooms_done_flag)
 			handle_links(line);
 		else
-			handle_rooms(line);
+			handle_rooms(line, graph);
 	}
 	if (!ft_strnequ("#", line, 1) || ft_strnequ("##", line, 2))
 		ft_printf("%s\n", line);

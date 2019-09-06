@@ -6,7 +6,7 @@
 /*   By: bvilla <bvilla@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/09/04 17:09:29 by bvilla            #+#    #+#             */
-/*   Updated: 2019/09/05 22:36:39 by bvilla           ###   ########.fr       */
+/*   Updated: 2019/09/05 22:53:48 by bvilla           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,5 +34,7 @@ typedef struct	s_edge {
 
 t_map			*map_init(void);
 void			kill(char print);
-void	**map_find(t_map *map, char *key);
+void			**map_find(t_map *map, char *key);
+void			map_insert(t_map *adj_map, char *key, void *val);
+void			add_graph_node(t_graph *graph, char *key);
 #endif
