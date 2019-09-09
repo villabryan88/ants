@@ -6,7 +6,7 @@
 /*   By: bvilla <bvilla@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/10/22 20:07:39 by bvilla            #+#    #+#             */
-/*   Updated: 2019/09/06 10:56:27 by bvilla           ###   ########.fr       */
+/*   Updated: 2019/09/09 16:16:51 by bvilla           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -119,4 +119,5 @@ t_map_node			*map_node_new(void *key, size_t key_size, void *val);
 char				map_insert(t_map *map, void *key, size_t key_size,
 															void *val);
 void				**map_find(t_map *map, char *key, size_t key_size);
+unsigned int		fnv_hash(unsigned char *buffer, size_t n);
 #endif

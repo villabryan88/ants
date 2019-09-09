@@ -6,12 +6,12 @@
 #    By: bvilla <bvilla@student.42.fr>              +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2018/10/22 20:11:16 by bvilla            #+#    #+#              #
-#    Updated: 2019/09/06 10:51:34 by bvilla           ###   ########.fr        #
+#    Updated: 2019/09/09 16:39:39 by bvilla           ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
 NAME = lem_in
-SOURCE = main.c
+SOURCE = main.c handle_rooms.c
 INC = .
 OBJS = $(SOURCE:%.c=%.o)
 

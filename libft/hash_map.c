@@ -6,7 +6,7 @@
 /*   By: bvilla <bvilla@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/09/04 16:58:32 by bvilla            #+#    #+#             */
-/*   Updated: 2019/09/06 10:56:29 by bvilla           ###   ########.fr       */
+/*   Updated: 2019/09/09 16:17:21 by bvilla           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,16 +25,7 @@ t_map		*map_init(size_t size)
 
 int			map_hash(t_map *map, void *key, size_t key_size)
 {
-	unsigned int	sum;
-
-	sum = 0;
-	while (key_size)
-	{
-		sum += *((char*)key);
-		key = ((char*)key) + 1;
-		key_size--;
-	}
-	return (sum % map->size);
+	return (fnv_hash(key, key_size) % map->size);
 }
 
 t_map_node	*map_node_new(void *key, size_t key_size, void *val)
