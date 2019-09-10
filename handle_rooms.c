@@ -6,7 +6,7 @@
 /*   By: bvilla <bvilla@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/09/09 16:39:01 by bvilla            #+#    #+#             */
-/*   Updated: 2019/09/09 18:49:54 by bvilla           ###   ########.fr       */
+/*   Updated: 2019/09/09 20:01:19 by bvilla           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,12 +17,8 @@ char	add_room(t_graph *const graph, char *name)
 	return map_insert(graph->adj_map, ft_strdup(name), ft_strlen(name), NULL);
 }
 
-t_edge	**find_room(t_graph *const graph, char *name)
+void	validate_room(char **room, t_graph *const graph)
 {
-	return ((t_edge**)map_find(graph->adj_map, name, ft_strlen(name)));
-}
-
-void	validate_room(char **room, t_graph *const graph){
 	if (!ft_strisint(room[1]) || !ft_strisint(room[2]) || room[0][0] == 'L')
 		kill(0);
 	if (find_room(graph, room[0]))

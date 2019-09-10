@@ -6,13 +6,14 @@
 /*   By: bvilla <bvilla@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/09/04 17:09:29 by bvilla            #+#    #+#             */
-/*   Updated: 2019/09/09 19:33:08 by bvilla           ###   ########.fr       */
+/*   Updated: 2019/09/09 20:10:45 by bvilla           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef LEM_IN_H
 # define LEM_IN_H
 # define SET_ME "#set_me"
+# define MAP_SIZE 40000
 # include <libft.h>
 # include <stdlib.h>
 # include <stdio.h>
@@ -36,5 +37,14 @@ void				validate_room(char **room, t_graph *const graph);
 void				parse_room(char**room, t_graph *const graph);
 t_edge				**find_room(t_graph *const graph, char *name);
 void				handle_edges(char *line, t_graph *const graph);
-
+t_graph				*graph_init(void);
+t_edge				*edge_init(char *loc);
+t_edge				**find_room(t_graph *const graph, char *name);
+t_edge				*find_edge(t_graph *const graph, char *src_room, char *dst_room);
+char				add_edge(t_graph *const graph, char *room1, char *room2);
+char				set_chk_cmd_flag(char *line, t_graph *const graph, char rooms_done_flag);
+void				handle_ants(char *line, int *n);
+void				handle_cmd_comments(char *line, t_graph *graph, char rooms_done_flag);
+char				set_chk_cmd_flag(char *line, t_graph *const graph, char rooms_done_flag);
+void				parse_check_print_input(char *line, t_graph *const graph, int *n);
 #endif
