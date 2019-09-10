@@ -6,7 +6,7 @@
 /*   By: bvilla <bvilla@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/09/04 17:09:29 by bvilla            #+#    #+#             */
-/*   Updated: 2019/09/10 14:16:22 by bvilla           ###   ########.fr       */
+/*   Updated: 2019/09/10 16:23:51 by bvilla           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,4 +47,5 @@ void				handle_ants(char *line, int *n);
 void				handle_cmd_comments(char *line, t_graph *graph, char rooms_done_flag);
 char				set_chk_cmd_flag(char *line, t_graph *const graph, char rooms_done_flag);
 void				handle_input(char *line, t_graph *const graph, int *n);
+t_map				*graph_dfs(t_graph *const graph);
 #endif

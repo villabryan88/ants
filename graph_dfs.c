@@ -6,7 +6,7 @@
 /*   By: bvilla <bvilla@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/09/10 14:14:26 by bvilla            #+#    #+#             */
-/*   Updated: 2019/09/10 16:07:51 by bvilla           ###   ########.fr       */
+/*   Updated: 2019/09/10 16:34:24 by bvilla           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,10 +32,10 @@ void	graph_dfs_rec(t_graph *const graph, char *n, t_map *visited, t_map *edge_to
 	it = *find_room(graph, n);
 	(void)edge_to;
 	while (it){
-		if(!*map_find(visited, it->loc, ft_strlen(it->loc) + 1))
+		if(!map_find(visited, it->loc, ft_strlen(it->loc) + 1))
 		{
-			// map_insert(edge_to, it->loc, ft_strlen(it->loc), n);
-			// graph_dfs_rec(graph, it->loc, visited, edge_to);
+			map_insert(edge_to, it->loc, ft_strlen(it->loc) + 1, n);
+			graph_dfs_rec(graph, it->loc, visited, edge_to);
 		}
 		it = it->next;
 	}

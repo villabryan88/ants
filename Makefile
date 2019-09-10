@@ -6,12 +6,13 @@
 #    By: bvilla <bvilla@student.42.fr>              +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2018/10/22 20:11:16 by bvilla            #+#    #+#              #
-#    Updated: 2019/09/10 14:17:40 by bvilla           ###   ########.fr        #
+#    Updated: 2019/09/10 16:31:39 by bvilla           ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
 NAME = lem_in
-SOURCE = main.c handle_rooms.c handle_edges.c graph.c handle_input.c
+SOURCE = main.c handle_rooms.c handle_edges.c graph.c handle_input.c \
+		 graph_dfs.c
 INC = .
 OBJS = $(SOURCE:%.c=%.o)
 
