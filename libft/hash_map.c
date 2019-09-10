@@ -6,7 +6,7 @@
 /*   By: bvilla <bvilla@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/09/04 16:58:32 by bvilla            #+#    #+#             */
-/*   Updated: 2019/09/09 18:48:49 by bvilla           ###   ########.fr       */
+/*   Updated: 2019/09/09 19:30:01 by bvilla           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -68,10 +68,8 @@ void		**map_find(t_map *map, char *key, size_t key_size)
 	while (it)
 	{
 		if (it->key_size == key_size && !ft_memcmp(it->key, key, key_size))
-			break ;
+			return (&it->val);
 		it = it->next;
 	}
-	if (!it)
-		return (NULL);
-	return (&it->val);
+	return (NULL);
 }

@@ -6,7 +6,7 @@
 /*   By: bvilla <bvilla@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/09/03 21:12:38 by bvilla            #+#    #+#             */
-/*   Updated: 2019/09/09 18:49:57 by bvilla           ###   ########.fr       */
+/*   Updated: 2019/09/09 19:00:30 by bvilla           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,17 +34,6 @@ t_graph	*graph_init(void)
 
 
 
-void	handle_edges(char *line)
-{
-	char	**tmp;
-
-	tmp = ft_strsplit(line, '-');
-	if (ft_arrlen(tmp, sizeof(void*)) == 2)
-		(void)line; // add edge to dictionary
-	else
-		kill(0);
-	ft_strarrdel(tmp);
-}
 
 void	handle_ants(char *line, int *n)
 {
@@ -102,7 +91,7 @@ void	parse_check_print_input(char *line, t_graph *const graph, int *n)
 		if (!rooms_done_flag)
 			handle_rooms(line, graph, &rooms_done_flag);
 		if (rooms_done_flag)
-			handle_edges(line);
+			handle_edges(line, graph);
 	}
 	if (!ft_strnequ("#", line, 1) || ft_strnequ("##", line, 2))
 		ft_printf("%s\n", line);
