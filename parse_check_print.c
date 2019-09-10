@@ -6,13 +6,13 @@
 /*   By: bvilla <bvilla@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/09/09 20:05:56 by bvilla            #+#    #+#             */
-/*   Updated: 2019/09/09 20:10:48 by bvilla           ###   ########.fr       */
+/*   Updated: 2019/09/10 14:15:39 by bvilla           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <lem_in.h>
 
-void	parse_check_print_input(char *line, t_graph *const graph, int *n)
+void	handle_input(char *line, t_graph *const graph, int *n)
 {
 	char	rooms_done_flag;
 
