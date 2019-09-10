@@ -6,7 +6,7 @@
 /*   By: bvilla <bvilla@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/10/22 20:07:39 by bvilla            #+#    #+#             */
-/*   Updated: 2019/09/09 16:16:51 by bvilla           ###   ########.fr       */
+/*   Updated: 2019/09/09 17:16:42 by bvilla           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,7 +33,7 @@ typedef struct		s_map_nd
 typedef struct		s_map
 {
 	t_map_node		**map;
-	int				size;
+	size_t			size;
 }					t_map;
 void				*ft_memset(void *b, int c, size_t len);
 void				ft_bzero(void *s, size_t n);
@@ -114,7 +114,7 @@ void				ft_lstdelnode(void *content, size_t size);
 char				**ft_strarrsearch(char **haystack, char *needle);
 void				ft_printhex(void *str, size_t n);
 t_map				*map_init(size_t size);
-int					map_hash(t_map *map, void *key, size_t key_size);
+size_t				map_hash(t_map *map, void *key, size_t key_size);
 t_map_node			*map_node_new(void *key, size_t key_size, void *val);
 char				map_insert(t_map *map, void *key, size_t key_size,
 															void *val);
