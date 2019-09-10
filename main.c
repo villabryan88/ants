@@ -6,7 +6,7 @@
 /*   By: bvilla <bvilla@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/09/03 21:12:38 by bvilla            #+#    #+#             */
-/*   Updated: 2019/09/09 19:00:30 by bvilla           ###   ########.fr       */
+/*   Updated: 2019/09/09 19:42:29 by bvilla           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,7 +39,7 @@ void	handle_ants(char *line, int *n)
 {
 	if (!ft_strisint(line))
 		kill(1);
-	if (ft_atoi(line) < 0)
+	if (ft_atoi(line) <= 0)
 		kill(0);
 	*n = ft_atoi(line);
 }

@@ -6,7 +6,7 @@
 /*   By: bvilla <bvilla@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/09/09 18:53:53 by bvilla            #+#    #+#             */
-/*   Updated: 2019/09/09 19:30:57 by bvilla           ###   ########.fr       */
+/*   Updated: 2019/09/09 19:35:56 by bvilla           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,13 +34,14 @@ char	add_edge(t_graph *const graph, char *room1, char *room2)
 	forward = edge_init(room2);
 	reverse = edge_init(room1);
 	if (!forward || !reverse)
-		kill(1);
+		return (0);
 	edge_list = find_room(graph, room1);
 	forward->next = *edge_list;
 	*edge_list = forward;
 	edge_list = find_room(graph, room2);
 	reverse->next = *edge_list;
 	*edge_list = reverse;
+	return (1);
 }
 
 t_edge	*find_edge(t_graph *const graph, char *src_room, char *dst_room)
@@ -56,15 +57,15 @@ t_edge	*find_edge(t_graph *const graph, char *src_room, char *dst_room)
 	return (NULL);
 }
 
-void	validate_edge(t_graph *const graph, char **room)
+char	validate_edge(t_graph *const graph, char **room)
 {
-	if (!ft_arrlen(room, sizeof(void*)) == 2)
-		kill(0);
-	if (!find_room(graph->adj_map, room[0]) || !find_room(graph->adj_map, room[1]))
-		kill(0);
+	if (ft_arrlen(room, sizeof(void*)) != 2)
+		return (0);
+	if (!find_room(graph, room[0]) || !find_room(graph, room[1]))
+		return (0);
 	if (find_edge(graph, room[0], room[1]))
-		kill(0);
-
+		return (0);
+	return (1);
 }
 
 
@@ -73,7 +74,9 @@ void	handle_edges(char *line, t_graph *const graph)
 	char	**rooms;
 
 	rooms = ft_strsplit(line, '-');
-	validate_edge(graph, rooms);
-	add_edge(graph, rooms[0], rooms[1]);
+	if (!validate_edge(graph, rooms))
+		kill (0);
+	if (!add_edge(graph, rooms[0], rooms[1]))
+		kill (1);
 	ft_strarrdel(rooms);
 }

@@ -6,7 +6,7 @@
 /*   By: bvilla <bvilla@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/09/04 17:09:29 by bvilla            #+#    #+#             */
-/*   Updated: 2019/09/09 19:16:46 by bvilla           ###   ########.fr       */
+/*   Updated: 2019/09/09 19:33:08 by bvilla           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,4 +35,6 @@ void				handle_rooms(char *line, t_graph *const graph, char *rooms_done_flag);
 void				validate_room(char **room, t_graph *const graph);
 void				parse_room(char**room, t_graph *const graph);
 t_edge				**find_room(t_graph *const graph, char *name);
+void				handle_edges(char *line, t_graph *const graph);
+
 #endif
