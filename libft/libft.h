@@ -6,7 +6,7 @@
 /*   By: bvilla <bvilla@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/10/22 20:07:39 by bvilla            #+#    #+#             */
-/*   Updated: 2019/09/09 17:16:42 by bvilla           ###   ########.fr       */
+/*   Updated: 2019/09/10 16:22:28 by bvilla           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,6 +35,11 @@ typedef struct		s_map
 	t_map_node		**map;
 	size_t			size;
 }					t_map;
+typedef struct		s_queue {
+	struct s_qnode	*first;
+	struct s_qnode	*last;
+}					t_queue;
+
 void				*ft_memset(void *b, int c, size_t len);
 void				ft_bzero(void *s, size_t n);
 void				*ft_memcpy(void *dst, const void *src, size_t n);
@@ -114,10 +119,16 @@ void				ft_lstdelnode(void *content, size_t size);
 char				**ft_strarrsearch(char **haystack, char *needle);
 void				ft_printhex(void *str, size_t n);
 t_map				*map_init(size_t size);
+void				map_del(t_map *del);
 size_t				map_hash(t_map *map, void *key, size_t key_size);
 t_map_node			*map_node_new(void *key, size_t key_size, void *val);
 char				map_insert(t_map *map, void *key, size_t key_size,
 															void *val);
 void				**map_find(t_map *map, char *key, size_t key_size);
 unsigned int		fnv_hash(unsigned char *buffer, size_t n);
+int					q_isempty(struct s_queue *queue);
+struct s_queue		*q_init(void);
+void				q_push(struct s_queue *queue, void *content);
+void				*q_pop(struct s_queue *queue);
+void				*q_peek(struct s_queue *queue);
 #endif

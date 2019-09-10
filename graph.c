@@ -6,7 +6,7 @@
 /*   By: bvilla <bvilla@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/09/09 19:54:34 by bvilla            #+#    #+#             */
-/*   Updated: 2019/09/09 19:57:35 by bvilla           ###   ########.fr       */
+/*   Updated: 2019/09/10 16:11:11 by bvilla           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,11 +36,6 @@ t_edge	*edge_init(char *loc)
 	return (new);
 }
 
-
-t_edge	**find_room(t_graph *const graph, char *name)
-{
-	return ((t_edge**)map_find(graph->adj_map, name, ft_strlen(name)));
-}
 
 t_edge	*find_edge(t_graph *const graph, char *src_room, char *dst_room)
 {

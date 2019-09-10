@@ -6,7 +6,7 @@
 #    By: bvilla <bvilla@student.42.fr>              +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2018/10/22 20:11:16 by bvilla            #+#    #+#              #
-#    Updated: 2019/09/09 16:12:48 by bvilla           ###   ########.fr        #
+#    Updated: 2019/09/10 16:18:37 by bvilla           ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -33,7 +33,7 @@ SOURCE = ft_memset.c ft_putchar.c ft_putnbr.c ft_putstr.c \
 		 ft_arrlen.c ft_strisnum.c ft_strisint.c \
 		 ft_elemval.c ft_lstsearch.c get_next_line.c \
 		 ft_strarrdel.c ft_lstdelnode.c ft_strarrsearch.c ft_printhex.c \
-		 hash_map.c fnv_hash.c
+		 hash_map.c hash_map2.c fnv_hash.c
 
 PRINTF_FILES = ft_printf.c ft_itoa_base.c get_args.c is_cond.c str_manip.c floats.c \
 		 dioux.c str_math.c format_float.c flip_flags.c 
