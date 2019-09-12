@@ -6,7 +6,7 @@
 /*   By: bvilla <bvilla@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/09/11 21:10:30 by bvilla            #+#    #+#             */
-/*   Updated: 2019/09/11 22:04:22 by bvilla           ###   ########.fr       */
+/*   Updated: 2019/09/11 22:24:35 by bvilla           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,12 +32,12 @@ t_map	*edmond_bfs(t_graph *const graph, t_map *taken)
 		it = *find_room(graph, (char*)q_peek(q));
 		while (it)
 		{
-			if(!map_find_str(visited, it->loc))
+			if(!map_find_str(visited, it->dst))
 			{
-				q_push(q, it->loc);
-				map_insert_str(edge_to, it->loc, q_peek(q));
-				map_insert_str(visited, it->loc, (void*)1);
-				if (ft_strequ((char*)q_peek(q), it->loc))
+				q_push(q, it->dst);
+				map_insert_str(edge_to, it->dst, q_peek(q));
+				map_insert_str(visited, it->dst, (void*)1);
+				if (ft_strequ((char*)q_peek(q), it->dst))
 					break;
 			}
 			it = it->next;

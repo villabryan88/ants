@@ -6,7 +6,7 @@
 /*   By: bvilla <bvilla@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/09/04 17:09:29 by bvilla            #+#    #+#             */
-/*   Updated: 2019/09/11 21:42:28 by bvilla           ###   ########.fr       */
+/*   Updated: 2019/09/11 22:23:55 by bvilla           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,7 +25,8 @@ typedef struct		s_graph {
 }					t_graph;
 
 typedef struct		s_edge {
-	char			*loc;
+	char			*src;
+	char			*dst;
 	char			taken;
 	struct s_edge	*rev;
 	struct s_edge 	*next;
@@ -39,7 +40,7 @@ void				parse_room(char**room, t_graph *const graph);
 t_edge				**find_room(t_graph *const graph, char *name);
 void				handle_edges(char *line, t_graph *const graph);
 t_graph				*graph_init(void);
-t_edge				*edge_init(char *loc);
+t_edge				*edge_init(char *src, char *dst);
 t_edge				**find_room(t_graph *const graph, char *name);
 t_edge				*find_edge(t_graph *const graph, char *src_room, char *dst_room);
 char				add_edge(t_graph *const graph, char *room1, char *room2);
