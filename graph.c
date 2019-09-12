@@ -6,7 +6,7 @@
 /*   By: bvilla <bvilla@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/09/09 19:54:34 by bvilla            #+#    #+#             */
-/*   Updated: 2019/09/10 16:11:11 by bvilla           ###   ########.fr       */
+/*   Updated: 2019/09/11 21:03:27 by bvilla           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,6 +32,7 @@ t_edge	*edge_init(char *loc)
 		return (NULL);
 	new->loc = copy;
 	new->taken = 0;
+	new->rev = NULL;
 	new->next = NULL;
 	return (new);
 }
@@ -58,6 +59,8 @@ char	add_edge(t_graph *const graph, char *room1, char *room2)
 
 	forward = edge_init(room2);
 	reverse = edge_init(room1);
+	forward->rev = reverse;
+	reverse->rev = forward;
 	if (!forward || !reverse)
 		return (0);
 	edge_list = find_room(graph, room1);

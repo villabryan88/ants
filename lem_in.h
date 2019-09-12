@@ -6,7 +6,7 @@
 /*   By: bvilla <bvilla@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/09/04 17:09:29 by bvilla            #+#    #+#             */
-/*   Updated: 2019/09/11 20:51:22 by bvilla           ###   ########.fr       */
+/*   Updated: 2019/09/11 21:02:16 by bvilla           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,6 +27,7 @@ typedef struct		s_graph {
 typedef struct		s_edge {
 	char			*loc;
 	char			taken;
+	struct s_edge	*rev;
 	struct s_edge 	*next;
 }					t_edge;
 
