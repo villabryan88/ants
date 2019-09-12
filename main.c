@@ -6,7 +6,7 @@
 /*   By: bvilla <bvilla@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/09/03 21:12:38 by bvilla            #+#    #+#             */
-/*   Updated: 2019/09/11 20:52:53 by bvilla           ###   ########.fr       */
+/*   Updated: 2019/09/11 21:42:47 by bvilla           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,5 +44,6 @@ int		main(void)
 		ft_printf(" <- %s", (char*)*map_find(tmp, it, ft_strlen(it) + 1));
 		it = (char*)*map_find(tmp, it, ft_strlen(it) + 1);
 	}
+	edmond(graph);
 	return (0);
 }

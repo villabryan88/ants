@@ -6,7 +6,7 @@
 /*   By: bvilla <bvilla@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/09/04 17:09:29 by bvilla            #+#    #+#             */
-/*   Updated: 2019/09/11 21:02:16 by bvilla           ###   ########.fr       */
+/*   Updated: 2019/09/11 21:42:28 by bvilla           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -52,4 +52,5 @@ void				**map_find_str(t_map *map, char *key);
 char				map_insert_str(t_map *map, char *key, void *val);
 t_map				*graph_dfs(t_graph *const graph);
 t_map				*graph_bfs(t_graph *const graph);
+t_map				*edmond(t_graph *const graph);
 #endif
