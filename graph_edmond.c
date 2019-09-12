@@ -6,7 +6,7 @@
 /*   By: bvilla <bvilla@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/09/11 21:10:30 by bvilla            #+#    #+#             */
-/*   Updated: 2019/09/11 22:44:47 by bvilla           ###   ########.fr       */
+/*   Updated: 2019/09/12 14:21:14 by bvilla           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,14 +50,10 @@ t_map	*edmond_bfs(t_graph *const graph, t_map *taken)
 	return (NULL);
 }
 
-t_map	*edmond(t_graph *const graph)
+void	process_path(t_graph *const graph, t_map *edge_to, t_map *taken)
 {
-	t_map	*edge_to;
-	t_map	*taken;
 	t_edge	*it;
 
-	taken = map_init(MAP_SIZE);
-	edge_to = edmond_bfs(graph, taken);
 	it = *map_find_str(edge_to, graph->t);
 	while (map_find_str(edge_to, it->src))
 	{
@@ -68,6 +64,16 @@ t_map	*edmond(t_graph *const graph)
 		map_insert_str(taken, it->src, (void*)1);
 		it = *map_find_str(edge_to, it->src);
 	}
+}
+
+t_map	*edmond(t_graph *const graph)
+{
+	t_map	*edge_to;
+	t_map	*taken;
+
+	taken = map_init(MAP_SIZE);
+	edge_to = edmond_bfs(graph, taken);
+	process_path(graph, edge_to, taken);
 
 
 
