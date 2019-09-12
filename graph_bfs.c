@@ -6,7 +6,7 @@
 /*   By: bvilla <bvilla@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/09/10 17:35:43 by bvilla            #+#    #+#             */
-/*   Updated: 2019/09/11 20:47:55 by bvilla           ###   ########.fr       */
+/*   Updated: 2019/09/11 20:58:37 by bvilla           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,9 +25,9 @@ t_map	*graph_bfs(t_graph *const graph)
 	visited = map_init(MAP_SIZE);
 	edge_to = map_init(MAP_SIZE);
 	q_push(q, graph->s);
+	map_insert_str(visited, (char*)q_peek(q), (void*)1);
 	while (!it && !q_isempty(q))
 	{
-		map_insert_str(visited, (char*)q_peek(q), (void*)1);
 		it = *find_room(graph, (char*)q_peek(q));
 		while (it)
 		{
@@ -35,6 +35,7 @@ t_map	*graph_bfs(t_graph *const graph)
 			{
 				q_push(q, it->loc);
 				map_insert_str(edge_to, it->loc, q_peek(q));
+				map_insert_str(visited, it->loc, (void*)1);
 				if (ft_strequ((char*)q_peek(q), it->loc))
 					break;
 			}
