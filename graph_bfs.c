@@ -6,7 +6,7 @@
 /*   By: bvilla <bvilla@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/09/10 17:35:43 by bvilla            #+#    #+#             */
-/*   Updated: 2019/09/11 20:47:03 by bvilla           ###   ########.fr       */
+/*   Updated: 2019/09/11 20:47:55 by bvilla           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,7 +35,7 @@ t_map	*graph_bfs(t_graph *const graph)
 			{
 				q_push(q, it->loc);
 				map_insert_str(edge_to, it->loc, q_peek(q));
-				if (ft_srequ((char*)q_peek(q), it->loc))
+				if (ft_strequ((char*)q_peek(q), it->loc))
 					break;
 			}
 			it = it->next;

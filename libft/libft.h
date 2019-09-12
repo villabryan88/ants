@@ -6,7 +6,7 @@
 /*   By: bvilla <bvilla@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/10/22 20:07:39 by bvilla            #+#    #+#             */
-/*   Updated: 2019/09/10 16:22:28 by bvilla           ###   ########.fr       */
+/*   Updated: 2019/09/11 20:49:50 by bvilla           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,6 +35,10 @@ typedef struct		s_map
 	t_map_node		**map;
 	size_t			size;
 }					t_map;
+typedef struct		s_qnode {
+	void			*content;
+	struct s_qnode	*next;
+}					t_qnode;
 typedef struct		s_queue {
 	struct s_qnode	*first;
 	struct s_qnode	*last;
