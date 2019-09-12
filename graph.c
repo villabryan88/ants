@@ -6,7 +6,7 @@
 /*   By: bvilla <bvilla@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/09/09 19:54:34 by bvilla            #+#    #+#             */
-/*   Updated: 2019/09/11 22:23:26 by bvilla           ###   ########.fr       */
+/*   Updated: 2019/09/11 22:28:31 by bvilla           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -62,10 +62,10 @@ char	add_edge(t_graph *const graph, char *room1, char *room2)
 
 	forward = edge_init(room1, room2);
 	reverse = edge_init(room2, room1);
-	forward->rev = reverse;
-	reverse->rev = forward;
 	if (!forward || !reverse)
 		return (0);
+	forward->rev = reverse;
+	reverse->rev = forward;
 	edge_list = find_room(graph, room1);
 	forward->next = *edge_list;
 	*edge_list = forward;

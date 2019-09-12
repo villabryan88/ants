@@ -6,7 +6,7 @@
 /*   By: bvilla <bvilla@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/09/11 21:10:30 by bvilla            #+#    #+#             */
-/*   Updated: 2019/09/11 22:24:35 by bvilla           ###   ########.fr       */
+/*   Updated: 2019/09/11 22:41:16 by bvilla           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,7 +35,7 @@ t_map	*edmond_bfs(t_graph *const graph, t_map *taken)
 			if(!map_find_str(visited, it->dst))
 			{
 				q_push(q, it->dst);
-				map_insert_str(edge_to, it->dst, q_peek(q));
+				map_insert_str(edge_to, it->dst, it);
 				map_insert_str(visited, it->dst, (void*)1);
 				if (ft_strequ((char*)q_peek(q), it->dst))
 					break;
@@ -45,7 +45,7 @@ t_map	*edmond_bfs(t_graph *const graph, t_map *taken)
 		q_pop(q);
 	}
 	map_del(visited);
-	if (map_find(edge_to, graph->t, ft_strlen(graph->t) + 1))
+	if (map_find_str(edge_to, graph->t))
 		return (edge_to);
 	return (NULL);
 }
@@ -54,17 +54,17 @@ t_map	*edmond(t_graph *const graph)
 {
 	t_map	*edge_to;
 	t_map	*taken;
-	char	*dst;
+	t_edge	*it;
 
 	taken = map_init(MAP_SIZE);
 	edge_to = edmond_bfs(graph, taken);
-	dst = *map_find_str(edge_to, graph->t);
-	while (map_find_str(edge_to, dst))
+	it = *map_find_str(edge_to, graph->t);
+	while (map_find_str(edge_to, it->src))
 	{
-		if (ft_strequ(dst, graph->s))
+		if (ft_strequ(it->src, graph->s))
 			break;
-		map_insert_str(taken, dst, (void*)1);
-		dst = (char*)*map_find_str(edge_to, dst);
+		map_insert_str(taken, it->src, (void*)1);
+		it = *map_find_str(edge_to, it->src);
 	}
 
 
