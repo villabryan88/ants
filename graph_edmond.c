@@ -6,7 +6,7 @@
 /*   By: bvilla <bvilla@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/09/11 21:10:30 by bvilla            #+#    #+#             */
-/*   Updated: 2019/09/11 22:41:16 by bvilla           ###   ########.fr       */
+/*   Updated: 2019/09/11 22:44:47 by bvilla           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -61,6 +61,8 @@ t_map	*edmond(t_graph *const graph)
 	it = *map_find_str(edge_to, graph->t);
 	while (map_find_str(edge_to, it->src))
 	{
+		it->taken = 1;
+		it->rev->taken = 0;
 		if (ft_strequ(it->src, graph->s))
 			break;
 		map_insert_str(taken, it->src, (void*)1);
