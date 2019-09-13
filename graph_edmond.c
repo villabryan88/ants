@@ -6,7 +6,7 @@
 /*   By: bvilla <bvilla@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/09/11 21:10:30 by bvilla            #+#    #+#             */
-/*   Updated: 2019/09/12 20:23:20 by bvilla           ###   ########.fr       */
+/*   Updated: 2019/09/12 20:25:18 by bvilla           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,9 +44,10 @@ t_map	*edmond_bfs(t_graph *const graph, t_map *node_taken)
 		}
 		q_pop(q);
 	}
-	map_del(visited);
-	if (map_find_str(edge_to, graph->t))
+	map_del(visited);											//free memory of map
+	if (map_find_str(edge_to, graph->t))						//if GOAL node was reached return edge_to, otherwise return NULL;
 		return (edge_to);
+	map_del(edge_to);										
 	return (NULL);
 }
 
