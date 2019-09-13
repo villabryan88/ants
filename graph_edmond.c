@@ -6,7 +6,7 @@
 /*   By: bvilla <bvilla@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/09/11 21:10:30 by bvilla            #+#    #+#             */
-/*   Updated: 2019/09/12 20:13:52 by bvilla           ###   ########.fr       */
+/*   Updated: 2019/09/12 20:23:20 by bvilla           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,19 +25,19 @@ t_map	*edmond_bfs(t_graph *const graph, t_map *node_taken)
 	q = q_init();
 	visited = map_init(MAP_SIZE);
 	edge_to = map_init(MAP_SIZE);
-	q_push(q, graph->s);
-	map_insert_str(visited, (char*)q_peek(q), (void*)1);
-	while (!it && !q_isempty(q))
+	q_push(q, graph->s);										//start bfs at S
+	map_insert_str(visited, (char*)q_peek(q), (void*)1);		//mark S as visited
+	while (!it && !q_isempty(q))								//have not reached 
 	{
-		it = *find_room(graph, (char*)q_peek(q));
-		while (it)
+		it = *find_room(graph, (char*)q_peek(q));				//it = edge_list of room at front of queue
+		while (it)												//iteratore through edgle list of room
 		{
-			if(!map_find_str(visited, it->dst))
+			if(!map_find_str(visited, it->dst))					//if the dst node is not visited
 			{
-				q_push(q, it->dst);
-				map_insert_str(edge_to, it->dst, it);
-				map_insert_str(visited, it->dst, (void*)1);
-				if (ft_strequ((char*)q_peek(q), it->dst))
+				q_push(q, it->dst);								//add node to queue
+				map_insert_str(edge_to, it->dst, it);			//add node to edge_to with val set to the current edge
+				map_insert_str(visited, it->dst, (void*)1);		//mark node as visited
+				if (ft_strequ((char*)q_peek(q), graph->t))		// if the top of the queue is the GOAL node, stop!
 					break;
 			}
 			it = it->next;
