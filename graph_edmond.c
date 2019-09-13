@@ -6,20 +6,20 @@
 /*   By: bvilla <bvilla@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/09/11 21:10:30 by bvilla            #+#    #+#             */
-/*   Updated: 2019/09/12 15:56:41 by bvilla           ###   ########.fr       */
+/*   Updated: 2019/09/12 20:13:52 by bvilla           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <lem_in.h>
 
-t_map	*edmond_bfs(t_graph *const graph, t_map *taken)
+t_map	*edmond_bfs(t_graph *const graph, t_map *node_taken)
 {
 	t_map	*visited;
 	t_map	*edge_to;
 	t_queue	*q;
 	t_edge	*it;
 
-	(void)taken;
+	(void)node_taken;
 
 	it = NULL;
 	q = q_init();
@@ -50,36 +50,37 @@ t_map	*edmond_bfs(t_graph *const graph, t_map *taken)
 	return (NULL);
 }
 
-void	process_path(t_graph *const graph, t_map *edge_to, t_map *taken)
+void	process_taken_subpath(t_queue *q, t_map *taken)
+{
+	q_pop(q);
+	q_pop(q);
+	while (!q_isempty(q))
+		*map_find_str(taken, ((t_edge*)q_pop(q))->dst) = 0;
+}
+
+void	process_path(t_graph *const graph, t_map *edge_to, t_map *node_taken)
 {
 	t_edge	*it;
-	char	first_taken;
+	t_queue	*q;
 
-	first_taken = 1;
+	q = q_init();
 	it = *map_find_str(edge_to, graph->t);
-	while (map_find_str(edge_to, it->src))
+	while (it)
 	{
 		it->taken = 1;
 		it->rev->taken = 0;
 		if (ft_strequ(it->src, graph->s))
 			break;
-		if (!map_find_str(taken, it->src))
-			map_insert_str(taken, it->src, (void*)1);
-		else 
+		if (!map_find_str(node_taken, it->src))
+			map_insert_str(node_taken, it->src, (void*)0);
+		if (*map_find_str(node_taken, it->src))
+			q_push(q, it);
+		else
 		{
-			if (*map_find_str(taken, it->src))
-			{
-				if (first_taken)
-					first_taken = 0;
-				else
-				{
-					if (map_find(edge_to))
-				}
-			}
-			else
-				*map_find_str(taken, it->src) = 1;	
+			*map_find_str(node_taken, it->src) = (void*)1;
+			if (!q_isempty(q))
+				process_taken_subpath(q, node_taken);
 		}
-
 		it = *map_find_str(edge_to, it->src);
 	}
 }
@@ -87,17 +88,17 @@ void	process_path(t_graph *const graph, t_map *edge_to, t_map *taken)
 t_map	*edmond(t_graph *const graph)
 {
 	t_map	*edge_to;
-	t_map	*taken;
+	t_map	*node_taken;
 
-	taken = map_init(MAP_SIZE);
-	edge_to = edmond_bfs(graph, taken);
-	process_path(graph, edge_to, taken);
+	node_taken = map_init(MAP_SIZE);
+	edge_to = edmond_bfs(graph, node_taken);
+	process_path(graph, edge_to, node_taken);
 
 
 
-	ft_printf("\nstart: %p\n", map_find_str(taken, "start"));
-	ft_printf("1: %p\n", *map_find_str(taken, "1"));
-	ft_printf("2: %p\n", *map_find_str(taken, "2"));
-	ft_printf("end: %p\n", map_find_str(taken, "end"));
+	ft_printf("\nstart: %p\n", map_find_str(node_taken, "start"));
+	ft_printf("1: %p\n", *map_find_str(node_taken, "1"));
+	ft_printf("2: %p\n", *map_find_str(node_taken, "2"));
+	ft_printf("end: %p\n", map_find_str(node_taken, "end"));
 	return edge_to;
 }
