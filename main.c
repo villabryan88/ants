@@ -6,7 +6,7 @@
 /*   By: bvilla <bvilla@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/09/03 21:12:38 by bvilla            #+#    #+#             */
-/*   Updated: 2019/09/11 22:41:34 by bvilla           ###   ########.fr       */
+/*   Updated: 2019/09/13 17:43:04 by bvilla           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,6 +19,47 @@ void	kill(char print)
 		perror(NULL);
 	exit(0);
 }
+void	print_path(t_map *edge_to, char *src, char *dst)
+{
+	char *it;
+	t_stack *stack;
+
+	stack = stack_init();
+	it = dst;
+	while (!ft_strequ(src, it))
+	{
+		stack_push(stack, it);
+		it = (*(t_edge**)map_find_str(edge_to, it))->src;
+	}
+	ft_printf("%s ", src);
+	while (!stack_isempty(stack))
+		ft_printf("-> %s ", stack_pop(stack));
+}
+
+void	print_paths(t_graph *const graph)
+{
+	t_edge	*it;
+	t_queue	*q;
+	t_map	*edge_to;
+	char	*head;
+
+	q = q_init();
+	it = *find_room(graph, graph->s);
+	while(it)
+	{
+		if (it->taken)
+			q_push(q, it->dst);
+		it = it->next;
+	}
+	while(!q_isempty(q))
+	{
+		ft_printf("%s -> ", graph->s);
+		head = q_pop(q);
+		edge_to = graph_bfs_taken(graph, head, graph->t);
+		print_path(edge_to, head, graph->t);
+		ft_printf("\n");
+	}
+}
 
 int		main(void)
 {
@@ -26,7 +67,6 @@ int		main(void)
 	t_graph	*const	graph = graph_init();
 	int				n;
 	t_map			*edge_to;
-	char			*it;
 
 	n = -1;
 	while (get_next_line(0, &line) > 0)
@@ -38,13 +78,6 @@ int		main(void)
 	if (!(edge_to = edmond(graph)))
 		kill(0);
 
-	ft_printf("%s ", graph->t);
-	it = graph->t;
-	while (map_find_str(edge_to, it))
-	{
-		it = (*(t_edge**)map_find_str(edge_to, it))->src;
-		ft_printf(" <- %s", it);
-	}
-
+	print_paths(graph);
 	return (0);
 }

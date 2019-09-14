@@ -6,13 +6,19 @@
 /*   By: bvilla <bvilla@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/09/11 21:10:30 by bvilla            #+#    #+#             */
-/*   Updated: 2019/09/12 20:25:18 by bvilla           ###   ########.fr       */
+/*   Updated: 2019/09/13 17:29:00 by bvilla           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <lem_in.h>
 
-t_map	*edmond_bfs(t_graph *const graph, t_map *node_taken)
+char	is_node_taken(t_map *node_taken, char *key)
+{
+	return (map_find_str(node_taken, key) && *map_find_str(node_taken, key));
+}
+
+t_map	*edmond_bfs(t_graph *const graph, t_map *node_taken,
+											char *src, char *dst)
 {
 	t_map	*visited;
 	t_map	*edge_to;
@@ -25,29 +31,29 @@ t_map	*edmond_bfs(t_graph *const graph, t_map *node_taken)
 	q = q_init();
 	visited = map_init(MAP_SIZE);
 	edge_to = map_init(MAP_SIZE);
-	q_push(q, graph->s);										//start bfs at S
-	map_insert_str(visited, (char*)q_peek(q), (void*)1);		//mark S as visited
-	while (!it && !q_isempty(q))								//have not reached 
+	q_push(q, src);
+	map_insert_str(visited, (char*)q_peek(q), (void*)1);
+	while (!it && !q_isempty(q))
 	{
-		it = *find_room(graph, (char*)q_peek(q));				//it = edge_list of room at front of queue
-		while (it)												//iteratore through edgle list of room
+		it = *find_room(graph, (char*)q_peek(q));
+		while (it)
 		{
-			if(!map_find_str(visited, it->dst))					//if the dst node is not visited
+			if(!map_find_str(visited, it->dst) && !it->taken)
 			{
-				q_push(q, it->dst);								//add node to queue
-				map_insert_str(edge_to, it->dst, it);			//add node to edge_to with val set to the current edge
-				map_insert_str(visited, it->dst, (void*)1);		//mark node as visited
-				if (ft_strequ((char*)q_peek(q), graph->t))		// if the top of the queue is the GOAL node, stop!
+				q_push(q, it->dst);
+				map_insert_str(edge_to, it->dst, it);
+				map_insert_str(visited, it->dst, (void*)1);
+				if (ft_strequ((char*)q_peek(q), dst))
 					break;
 			}
 			it = it->next;
 		}
 		q_pop(q);
 	}
-	map_del(visited);											//free memory of map
-	if (map_find_str(edge_to, graph->t))						//if GOAL node was reached return edge_to, otherwise return NULL;
+	map_del(visited);
+	if (map_find_str(edge_to, dst))
 		return (edge_to);
-	map_del(edge_to);										
+	map_del(edge_to);
 	return (NULL);
 }
 
@@ -85,16 +91,16 @@ void	process_path(t_graph *const graph, t_map *edge_to, t_map *node_taken)
 		it = *map_find_str(edge_to, it->src);
 	}
 }
-
 t_map	*edmond(t_graph *const graph)
 {
 	t_map	*edge_to;
 	t_map	*node_taken;
 
 	node_taken = map_init(MAP_SIZE);
-	edge_to = edmond_bfs(graph, node_taken);
+	edge_to = edmond_bfs(graph, node_taken, graph->s, graph->t);
 	process_path(graph, edge_to, node_taken);
-
+	edge_to = edmond_bfs(graph, node_taken, graph->s, graph->t);
+	process_path(graph, edge_to, node_taken);
 
 
 	ft_printf("\nstart: %p\n", map_find_str(node_taken, "start"));

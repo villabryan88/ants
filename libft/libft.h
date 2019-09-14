@@ -6,7 +6,7 @@
 /*   By: bvilla <bvilla@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/10/22 20:07:39 by bvilla            #+#    #+#             */
-/*   Updated: 2019/09/11 20:49:50 by bvilla           ###   ########.fr       */
+/*   Updated: 2019/09/13 17:17:52 by bvilla           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,14 +35,26 @@ typedef struct		s_map
 	t_map_node		**map;
 	size_t			size;
 }					t_map;
-typedef struct		s_qnode {
+typedef struct		s_qnode
+{
 	void			*content;
 	struct s_qnode	*next;
 }					t_qnode;
-typedef struct		s_queue {
+typedef struct		s_queue
+{
 	struct s_qnode	*first;
 	struct s_qnode	*last;
 }					t_queue;
+typedef struct 		s_node
+{
+	void			*content;
+	struct s_node	*next;
+}					t_node;
+
+typedef struct		s_stack
+{
+	struct s_node	*top;
+}					t_stack;
 
 void				*ft_memset(void *b, int c, size_t len);
 void				ft_bzero(void *s, size_t n);
@@ -135,4 +147,9 @@ struct s_queue		*q_init(void);
 void				q_push(struct s_queue *queue, void *content);
 void				*q_pop(struct s_queue *queue);
 void				*q_peek(struct s_queue *queue);
+struct s_stack		*stack_init(void);
+void				*stack_pop(struct s_stack *stack);
+void				stack_push(struct s_stack *stack, void *content);
+void				*stack_peek(struct s_stack *stack);
+int					stack_isempty(struct s_stack *stack);
 #endif
