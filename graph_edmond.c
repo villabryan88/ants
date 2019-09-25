@@ -6,7 +6,7 @@
 /*   By: bvilla <bvilla@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/09/11 21:10:30 by bvilla            #+#    #+#             */
-/*   Updated: 2019/09/13 17:29:00 by bvilla           ###   ########.fr       */
+/*   Updated: 2019/09/24 19:54:51 by bvilla           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,6 +50,7 @@ t_map	*edmond_bfs(t_graph *const graph, t_map *node_taken,
 		}
 		q_pop(q);
 	}
+	free(q);
 	map_del(visited);
 	if (map_find_str(edge_to, dst))
 		return (edge_to);
@@ -90,6 +91,7 @@ void	process_path(t_graph *const graph, t_map *edge_to, t_map *node_taken)
 		}
 		it = *map_find_str(edge_to, it->src);
 	}
+	free(q);
 }
 t_map	*edmond(t_graph *const graph)
 {
@@ -99,6 +101,7 @@ t_map	*edmond(t_graph *const graph)
 	node_taken = map_init(MAP_SIZE);
 	edge_to = edmond_bfs(graph, node_taken, graph->s, graph->t);
 	process_path(graph, edge_to, node_taken);
+	map_del(edge_to);
 	edge_to = edmond_bfs(graph, node_taken, graph->s, graph->t);
 	process_path(graph, edge_to, node_taken);
 
@@ -107,5 +110,6 @@ t_map	*edmond(t_graph *const graph)
 	ft_printf("1: %p\n", *map_find_str(node_taken, "1"));
 	ft_printf("2: %p\n", *map_find_str(node_taken, "2"));
 	ft_printf("end: %p\n", map_find_str(node_taken, "end"));
+	map_del(node_taken);
 	return edge_to;
 }

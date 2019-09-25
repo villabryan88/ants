@@ -6,7 +6,7 @@
 /*   By: bvilla <bvilla@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/09/13 16:29:28 by bvilla            #+#    #+#             */
-/*   Updated: 2019/09/13 17:21:07 by bvilla           ###   ########.fr       */
+/*   Updated: 2019/09/24 19:58:45 by bvilla           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,10 +20,12 @@ struct s_stack *stack_init(void){
 }
 
 void *stack_pop(struct s_stack *stack){
-	t_node *node = stack->top;
-	void *content;
+	t_node	*node;
+	void	*content;
+
 	if (stack_isempty(stack))
 		return (NULL);
+	node = stack->top;
 	content = node->content;
 	stack->top = node->next;
 	free(node);

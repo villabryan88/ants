@@ -6,7 +6,7 @@
 /*   By: bvilla <bvilla@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/09/10 17:35:43 by bvilla            #+#    #+#             */
-/*   Updated: 2019/09/13 17:38:00 by bvilla           ###   ########.fr       */
+/*   Updated: 2019/09/24 20:02:57 by bvilla           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -78,6 +78,7 @@ t_map	*graph_bfs_taken(t_graph *const graph, char *src, char *dst)
 		}
 		q_pop(q);
 	}
+	free(q);
 	map_del(visited);
 	if (map_find_str(edge_to, dst))
 		return (edge_to);

@@ -6,7 +6,7 @@
 /*   By: bvilla <bvilla@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/09/03 21:12:38 by bvilla            #+#    #+#             */
-/*   Updated: 2019/09/13 17:43:04 by bvilla           ###   ########.fr       */
+/*   Updated: 2019/09/24 20:04:05 by bvilla           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,6 +34,7 @@ void	print_path(t_map *edge_to, char *src, char *dst)
 	ft_printf("%s ", src);
 	while (!stack_isempty(stack))
 		ft_printf("-> %s ", stack_pop(stack));
+	free(stack);
 }
 
 void	print_paths(t_graph *const graph)
@@ -58,7 +59,9 @@ void	print_paths(t_graph *const graph)
 		edge_to = graph_bfs_taken(graph, head, graph->t);
 		print_path(edge_to, head, graph->t);
 		ft_printf("\n");
+		map_del(edge_to);
 	}
+	free(q);
 }
 
 int		main(void)
@@ -72,6 +75,7 @@ int		main(void)
 	while (get_next_line(0, &line) > 0)
 	{
 		handle_input(line, graph, &n);
+		free(line);
 	}
 	if (!line)
 		kill(1);
@@ -79,5 +83,6 @@ int		main(void)
 		kill(0);
 
 	print_paths(graph);
+	while(1);
 	return (0);
 }
